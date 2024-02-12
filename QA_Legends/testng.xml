@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="testCases.Listeners"></listener>
+	</listeners>
+	<!--<groups> 
+		<run>
+			<include name="reggression"></include>
+		</run>
+		  </groups>-->
+  <test thread-count="5" name="Test">
+	  <parameter name="browser" value="Chrome"></parameter>
+	  <classes>
+		  <class name="testCases.QA_LegendTestCases">
+			  <methods>
+				   
+				  <!-- <include name="addMember"></include>-->
+				 <!-- <include name="add_Notes"></include> 
+				  <include name="loginCRM"></include>  
+				  <include name="add_Item"></include> -->
+				    <!--<include name="add_Announcements"></include> 
+				   <include name="applyAndAssignLeave"> </include>
+				   <include name="add_Announcements"> </include> 
+				   <include name="add_Client"></include>
+				  <include name="addEvent"></include>
+				  <include name="addinvoice"> </include>
+				  -->
+			  </methods>
+		  </class>
+	  </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
