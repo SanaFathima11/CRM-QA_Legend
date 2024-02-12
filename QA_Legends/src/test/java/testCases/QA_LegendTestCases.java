@@ -33,6 +33,7 @@ import pageClasses.QA_Legend_LeavePage;
 import pageClasses.QA_Legend_LoginPage;
 import pageClasses.QA_Legend_MessagePage;
 import pageClasses.QA_Legend_NotePage;
+import pageClasses.QA_Legend_Quick_AddNote;
 import utilities.DateUtilities;
 import utilities.ExcelUtility;
 import utilities.FakerUtilities;
@@ -42,7 +43,53 @@ import utilities.WaitUtilities;
 public class QA_LegendTestCases extends BaseClass
 {
 	public WebDriver driver;
+	FileInputStream fis;
+	public Properties prop;
+	public QA_Legend_LoginPage loginPage;   //obj declare
+	public QA_Legend_HomePage homePage;
+	public QA_Legend_EventPage eventPage;
+	public QA_Legend_NotePage notePage;
+	public QA_Legend_MessagePage messagePage;
+	public QA_Legend_ClientPage clientPage;
+	public QA_Legend_ItemPage itemPage;
+	public QA_Legend_AnnouncementPage announcementPage;
+	public QA_Legend_LeavePage leavePage;
+	public QA_Legend_AddMember addMemberPage;
+	public QALegendInvoicePage invoicepage;
+	public  QA_Legend_Quick_AddNote quickaddNotePage;
 	
+	
+	
+	
+	@BeforeMethod
+	@Parameters({"browser"})
+	public void initialization(String browser) throws Exception 
+	{
+		driver = browserInitization(browser);
+		driver.manage().window().maximize();
+		fis = new FileInputStream("C:\\Users\\sanaa\\eclipse-workspace\\QA_Legends\\src\\main\\java\\testData\\testData.properties");
+		prop = new Properties();
+		prop.load(fis);
+		driver.get(prop.getProperty("url"));
+		
+		loginPage = new QA_Legend_LoginPage(driver); //obj initialize
+		homePage = new QA_Legend_HomePage(driver);
+		eventPage = new QA_Legend_EventPage(driver);
+		notePage = new QA_Legend_NotePage(driver);
+		messagePage = new QA_Legend_MessagePage(driver);
+		clientPage = new QA_Legend_ClientPage(driver);
+		itemPage = new QA_Legend_ItemPage(driver);
+		announcementPage = new QA_Legend_AnnouncementPage(driver);
+		leavePage = new QA_Legend_LeavePage(driver);
+		addMemberPage = new QA_Legend_AddMember(driver);
+		invoicepage = new QALegendInvoicePage(driver);
+		quickaddNotePage = new QA_Legend_Quick_AddNote(driver);
+		
+		loginPage.enterUserName(prop.getProperty("username"));
+		loginPage.enterPassword(prop.getProperty("password"));
+		loginPage.clickLoginButton();
+		
+		}	
 	
 	
 	
@@ -307,6 +354,12 @@ public void addEvent() throws IOException
 	eventPage.inputEventLocation(event_Location);
 	eventPage.clickon_Event_Save();
 }
+@AfterMethod
+public void tearDown()
+{
+	driver.quit();
+}
+
 
 
 }
